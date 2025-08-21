@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="cyberSecureOverlay1" class="overlay active">
+        <div class="overlay-content light-mode warning">
+            <div class="logo-bar">
+                <img src="logo1.png" alt="CyberSecure NTS Logo" class="overlay-logo">
+            </div>
+            <div class="message-container">
+                <h2 class="warning-title">Varování CyberSecure NTS:</h2>
+                <p>Pokoušíte se otevřít stránky, které mohou být potenciálně škodlivé nebo obsahují malware.</p>
+                <p class="details"><strong>DNS:</strong> https://double.click.net-natasa-russia/</p>
+                <p class="details"><strong>Vardrobe:</strong> Phishing - stránka z Vás může vylákat citlivé osobní informace nebo vás podvést a nainstalovat malware. Doporučujeme stránku opustit.</p>
+                <button class="rounded-button" onclick="closeOverlay('cyberSecureOverlay1')">Zavřít hlášení</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainContent" class="main-content">
+        <img src="logo2.png" alt="Roblox Logo" class="roblox-logo">
+        <h1>Hraješ rád Roblox?</h1>
+        <div class="button-container">
+            <button class="agree-button green-square" onclick="showThankYouAndPermission()">Souhlasím</button>
+            <button class="agree-button green-square" onclick="showThankYouAndPermission()">Souhlasím</button>
+        </div>
+    </div>
+
+    <div id="thankYouMessage" class="thank-you-message">
+        <h1 id="thankYouText">Děkujeme za potvrzení připojení vpuštěno.</h1>
+    </div>
+
+    <div id="cyberSecureOverlay3" class="overlay">
+        <div class="overlay-content light-mode permission">
+            <div class="logo-bar">
+                <img src="logo1.png" alt="CyberSecure NTS Logo" class="overlay-logo">
+            </div>
+            <div class="message-container">
+                <h2 class="permission-title">Aplikace Robiox žádá o oprávnění plné řízení zařízení. Chcete to povolit?</h2>
+                <p>Udělejte to pouze pokud aplikaci bezmezně důvěřujete a jste si vědomi, že to může mít negativní důsledky.</p>
+                <div class="permission-buttons">
+                    <button class="permission-button accept" onclick="closePermissionOverlay(true)">Povolit</button>
+                    <button class="permission-button deny" onclick="closePermissionOverlay(false)">Zamítnout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="securityAlert" class="security-alert">
+        <div class="alert-content">
+            <div class="alert-header">
+                <h3>CyberSecure NTS</h3>
+            </div>
+            <p>Právě jsme úspěšně odpojili a odstranili malware. Nyní jste v bezpečí, ale abychom dokončili odstranění, restartujte prosím svůj počítač.</p>
+            <p>Pak bude vše jako kdykoli předtím. Vaše NTS.</p>
+            <button class="restart-button" onclick="restartAndClear()">Restartovat</button>
+        </div>
+    </div>
+
+    <script>
+        function closeOverlay(overlayId) {
+            document.getElementById(overlayId).classList.remove('active');
+            
+            if (overlayId === 'cyberSecureOverlay1') {
+                document.getElementById('mainContent').style.display = 'flex';
+            }
+        }
+        
+        function showThankYouAndPermission() {
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('thankYouMessage').style.display = 'flex';
+            
+            setTimeout(() => {
+                document.getElementById('cyberSecureOverlay3').classList.add('active');
+            }, 3000); // 3 sekundy
+        }
+
+        function closePermissionOverlay(isAccepted) {
+            document.getElementById('cyberSecureOverlay3').classList.remove('active');
+
+            if (!isAccepted) {
+                document.getElementById('thankYouText').innerText = "Jejda. Při hře se stala chyba. Aktualizujte potáhnutím shora.";
+                setTimeout(() => {
+                    document.getElementById('securityAlert').classList.add('active');
+                }, 3000); // Další 3 sekundy zpoždění pro vysunutí hlášky
+            }
+        }
+
+        function restartAndClear() {
+            document.getElementById('securityAlert').classList.remove('active');
+            document.body.classList.add('black-background');
+            document.body.innerHTML = '';
+        }
+    </script>
+
+</body>
+</html>
